@@ -5,16 +5,16 @@
     'use strict';
 
     $(document).ready(function() {
-        // Handle dropdown menu toggle
-        $('.htr-cub-dropdown .htr-cub-main-button').on('click', function(e) {
+        // Handle dropdown menu toggle for mobile/click support
+        $('.htr-cub-toggle-btn').on('click', function(e) {
             e.preventDefault();
-            $(this).next('.htr-cub-dropdown-content').toggleClass('show');
+            $(this).closest('.htr-cub-dropdown').toggleClass('active');
         });
 
         // Close the dropdown if the user clicks outside of it
         $(window).on('click', function(e) {
             if (!$(e.target).closest('.htr-cub-dropdown').length) {
-                $('.htr-cub-dropdown-content').removeClass('show');
+                $('.htr-cub-dropdown').removeClass('active');
             }
         });
     });

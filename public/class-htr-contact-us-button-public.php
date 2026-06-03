@@ -65,6 +65,7 @@ class HTR_Contact_Us_Button_Public {
          * in HTR_Contact_Us_Button_Loader. Run the HTR_Contact_Us_Button_Loader to
          * execute the hooks with WordPress.
          */
+        wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4', 'all' );
         wp_enqueue_style( $this->plugin_name, HTR_CUB_PLUGIN_URL . 'public/css/htr-contact-us-button-public.css', array(), $this->version, 'all' );
     }
 
@@ -92,28 +93,52 @@ class HTR_Contact_Us_Button_Public {
      */
     public function render_contact_buttons() {
         $options = get_option( 'htr_cub_options' );
+        if ( ! is_array( $options ) ) {
+            $options = array();
+        }
+
+        echo '<script>console.log("HTR Contact Us Button: Initialization started in footer.");</script>';
 
         // Check if buttons should be displayed on the current page
         if ( ! $this->should_display_on_current_page( $options ) ) {
+            echo '<script>console.log("HTR Contact Us Button: Not displaying on this page due to display condition settings.");</script>';
             return;
         }
 
-        $display_mode = isset( $options['htr_cub_display_mode'] ) ? $options['htr_cub_display_mode'] : 'single';
-        $button_position = isset( $options['htr_cub_button_position'] ) ? $options['htr_cub_button_position'] : 'bottom-right';
+        $display_mode = ! empty( $options['htr_cub_display_mode'] ) ? $options['htr_cub_display_mode'] : 'single';
+        $button_shape = ! empty( $options['htr_cub_button_shape'] ) ? $options['htr_cub_button_shape'] : 'circle';
+        $button_position = ! empty( $options['htr_cub_button_position'] ) ? $options['htr_cub_button_position'] : 'bottom-right';
         $bottom_offset = isset( $options['htr_cub_bottom_offset'] ) ? $options['htr_cub_bottom_offset'] : 20;
         $right_offset = isset( $options['htr_cub_right_offset'] ) ? $options['htr_cub_right_offset'] : 20;
         $top_offset = isset( $options['htr_cub_top_offset'] ) ? $options['htr_cub_top_offset'] : 20;
         $left_offset = isset( $options['htr_cub_left_offset'] ) ? $options['htr_cub_left_offset'] : 20;
 
-        $button_bg_color = isset( $options['htr_cub_button_bg_color'] ) ? $options['htr_cub_button_bg_color'] : '#0073aa';
-        $button_icon_color = isset( $options['htr_cub_button_icon_color'] ) ? $options['htr_cub_button_icon_color'] : '#ffffff';
-        $button_border_color = isset( $options['htr_cub_button_border_color'] ) ? $options['htr_cub_button_border_color'] : '#0073aa';
-        $button_shadow = isset( $options['htr_cub_button_shadow'] ) ? $options['htr_cub_button_shadow'] : '0px 0px 10px rgba(0,0,0,0.2)';
-        $button_hover_bg_color = isset( $options['htr_cub_button_hover_bg_color'] ) ? $options['htr_cub_button_hover_bg_color'] : '#005177';
-        $button_hover_icon_color = isset( $options['htr_cub_button_hover_icon_color'] ) ? $options['htr_cub_button_hover_icon_color'] : '#ffffff';
-        $button_hover_border_color = isset( $options['htr_cub_button_hover_border_color'] ) ? $options['htr_cub_button_hover_border_color'] : '#005177';
+        $button_bg_color = ! empty( $options['htr_cub_button_bg_color'] ) ? $options['htr_cub_button_bg_color'] : '#0073aa';
+        $button_icon_color = ! empty( $options['htr_cub_button_icon_color'] ) ? $options['htr_cub_button_icon_color'] : '#ffffff';
+        $button_border_color = ! empty( $options['htr_cub_button_border_color'] ) ? $options['htr_cub_button_border_color'] : '#0073aa';
+        $button_shadow = ! empty( $options['htr_cub_button_shadow'] ) ? $options['htr_cub_button_shadow'] : '0px 0px 10px rgba(0,0,0,0.2)';
+        $button_hover_bg_color = ! empty( $options['htr_cub_button_hover_bg_color'] ) ? $options['htr_cub_button_hover_bg_color'] : '#005177';
+        $button_hover_icon_color = ! empty( $options['htr_cub_button_hover_icon_color'] ) ? $options['htr_cub_button_hover_icon_color'] : '#ffffff';
+        $button_hover_border_color = ! empty( $options['htr_cub_button_hover_border_color'] ) ? $options['htr_cub_button_hover_border_color'] : '#005177';
+
+        $main_button_name = isset( $options['htr_cub_main_button_name'] ) ? $options['htr_cub_main_button_name'] : '';
+        $main_button_icon = ! empty( $options['htr_cub_main_button_icon'] ) ? $options['htr_cub_main_button_icon'] : 'fas fa-comments';
+        $main_button_link = ! empty( $options['htr_cub_main_button_link'] ) ? $options['htr_cub_main_button_link'] : '#';
+        $main_button_target = ! empty( $options['htr_cub_main_button_target'] ) ? $options['htr_cub_main_button_target'] : '_self';
 
         $sub_buttons = isset( $options['htr_cub_sub_buttons'] ) ? $options['htr_cub_sub_buttons'] : array();
+
+        // Output debug info to browser console
+        $debug_info = array(
+            'display_mode'      => $display_mode,
+            'button_shape'      => $button_shape,
+            'button_position'   => $button_position,
+            'main_button_name'  => $main_button_name,
+            'main_button_icon'  => $main_button_icon,
+            'sub_buttons_count' => count( $sub_buttons ),
+            'display_pages'     => isset($options['htr_cub_display_pages']) ? $options['htr_cub_display_pages'] : 'all'
+        );
+        echo '<script>console.log("HTR Contact Us Button Configuration:", ' . wp_json_encode( $debug_info ) . ');</script>';
 
         // Generate dynamic CSS
         $dynamic_css = "
@@ -134,39 +159,60 @@ class HTR_Contact_Us_Button_Public {
 
         $dynamic_css .= "
             }
-            .htr-cub-button {
+            .htr-cub-button, .htr-cub-sub-btn {
                 background-color: {$button_bg_color};
                 color: {$button_icon_color};
                 border-color: {$button_border_color};
                 box-shadow: {$button_shadow};
             }
-            .htr-cub-button:hover {
+            .htr-cub-button:hover, .htr-cub-sub-btn:hover {
                 background-color: {$button_hover_bg_color};
                 color: {$button_hover_icon_color};
                 border-color: {$button_hover_border_color};
             }
         ";
 
-        wp_add_inline_style( $this->plugin_name, $dynamic_css );
+        // Print style directly to ensure it works in footer
+        echo '<style id="htr-cub-dynamic-css">' . strip_tags( $dynamic_css ) . '</style>';
+
+        // Determine vertical direction based on position
+        $vertical_direction = ( strpos( $button_position, 'top' ) !== false ) ? 'down' : 'up';
+        $wrapper_classes = 'htr-cub-wrapper htr-cub-display-mode-' . esc_attr( $display_mode ) . ' htr-cub-shape-' . esc_attr( $button_shape ) . ' htr-cub-dir-' . esc_attr( $vertical_direction ) . ' htr-cub-position-' . esc_attr( $button_position );
 
         // Render buttons based on display mode
-        echo '<div class="htr-cub-wrapper htr-cub-display-mode-' . esc_attr( $display_mode ) . '">';
+        echo '<div class="' . $wrapper_classes . '">';
+
+        $main_button_content = '';
+        if ( ! empty( $main_button_icon ) ) {
+            $main_button_content .= '<i class="' . esc_attr( $main_button_icon ) . '"></i> ';
+        }
+        if ( ! empty( $main_button_name ) ) {
+            $main_button_content .= '<span class="htr-cub-button-name">' . esc_html( $main_button_name ) . '</span>';
+        }
 
         if ( 'single' === $display_mode ) {
             // Render a single button (main button)
-            echo '<a href="#" class="htr-cub-button htr-cub-main-button">Main Button</a>'; // Placeholder
+            echo '<a href="' . esc_url( $main_button_link ) . '" target="' . esc_attr( $main_button_target ) . '" class="htr-cub-button htr-cub-main-button">' . $main_button_content . '</a>';
         } elseif ( in_array( $display_mode, array( 'multiple_horizontal', 'multiple_vertical' ) ) ) {
             // Render multiple buttons
             foreach ( $sub_buttons as $button ) {
-                echo '<a href="' . esc_url( $button['link'] ) . '" target="' . esc_attr( $button['target'] ) . '" class="htr-cub-button">' . esc_html( $button['name'] ) . '</a>';
+                $btn_icon = !empty($button['icon']) ? '<i class="' . esc_attr($button['icon']) . '"></i> ' : '';
+                $btn_name = !empty($button['name']) ? '<span class="htr-cub-button-name">' . esc_html($button['name']) . '</span>' : '';
+                echo '<a href="' . esc_url( $button['link'] ) . '" target="' . esc_attr( $button['target'] ) . '" class="htr-cub-button htr-cub-sub-btn" title="' . esc_attr( $button['name'] ) . '">' . $btn_icon . $btn_name . '</a>';
             }
         } elseif ( in_array( $display_mode, array( 'dropdown_vertical', 'dropdown_horizontal' ) ) ) {
-            // Render dropdown menu
+            // Render dropdown menu (which is now a group of similar buttons)
             echo '<div class="htr-cub-dropdown">';
-            echo '<button class="htr-cub-button htr-cub-main-button">Main Button</button>'; // Placeholder for main dropdown button
+            
+            // The main toggle button
+            echo '<button class="htr-cub-button htr-cub-main-button htr-cub-toggle-btn">' . $main_button_content . '</button>';
+            
+            // The container for sub-buttons
             echo '<div class="htr-cub-dropdown-content">';
             foreach ( $sub_buttons as $button ) {
-                echo '<a href="' . esc_url( $button['link'] ) . '" target="' . esc_attr( $button['target'] ) . '">' . esc_html( $button['name'] ) . '</a>';
+                $btn_icon = !empty($button['icon']) ? '<i class="' . esc_attr($button['icon']) . '"></i> ' : '';
+                $btn_name = !empty($button['name']) ? '<span class="htr-cub-button-name">' . esc_html($button['name']) . '</span>' : '';
+                echo '<a href="' . esc_url( $button['link'] ) . '" target="' . esc_attr( $button['target'] ) . '" class="htr-cub-sub-btn" title="' . esc_attr( $button['name'] ) . '">' . $btn_icon . $btn_name . '</a>';
             }
             echo '</div>';
             echo '</div>';
@@ -183,7 +229,7 @@ class HTR_Contact_Us_Button_Public {
      * @return   bool                 True if buttons should be displayed, false otherwise.
      */
     private function should_display_on_current_page( $options ) {
-        $display_pages = isset( $options['htr_cub_display_pages'] ) ? $options['htr_cub_display_pages'] : 'all';
+        $display_pages = ! empty( $options['htr_cub_display_pages'] ) ? $options['htr_cub_display_pages'] : 'all';
         $custom_pages = isset( $options['htr_cub_custom_pages'] ) ? array_map( 'trim', explode( ',', $options['htr_cub_custom_pages'] ) ) : array();
 
         if ( 'all' === $display_pages ) {
@@ -203,6 +249,7 @@ class HTR_Contact_Us_Button_Public {
             }
         }
 
+        echo '<script>console.log("HTR Contact Us Button: Condition failed for display_pages setting -> ' . esc_js( $display_pages ) . '");</script>';
         return false;
     }
 
