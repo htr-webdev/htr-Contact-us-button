@@ -90,13 +90,13 @@ class HTR_Contact_Us_Button_Admin {
             $this->plugin_name,
             'htr_cub_admin',
             array(
-                'name_label'        => esc_html__( 'Name:', 'htr-cub' ),
-                'icon_label'        => esc_html__( 'Icon (Font Awesome class):', 'htr-cub' ),
-                'link_label'        => esc_html__( 'Link:', 'htr-cub' ),
-                'target_label'      => esc_html__( 'Link Target:', 'htr-cub' ),
-                'same_tab_label'    => esc_html__( 'Same Tab', 'htr-cub' ),
-                'new_tab_label'     => esc_html__( 'New Tab', 'htr-cub' ),
-                'remove_button_label' => esc_html__( 'Remove Button', 'htr-cub' ),
+                'name_label'        => esc_html__( 'نام:', 'htr-cub' ),
+                'icon_label'        => esc_html__( 'آیکون (کلاس Font Awesome):', 'htr-cub' ),
+                'link_label'        => esc_html__( 'لینک:', 'htr-cub' ),
+                'target_label'      => esc_html__( 'هدف لینک:', 'htr-cub' ),
+                'same_tab_label'    => esc_html__( 'همین تب', 'htr-cub' ),
+                'new_tab_label'     => esc_html__( 'تب جدید', 'htr-cub' ),
+                'remove_button_label' => esc_html__( 'حذف دکمه', 'htr-cub' ),
             )
         );
     }
@@ -109,7 +109,7 @@ class HTR_Contact_Us_Button_Admin {
     public function add_plugin_admin_menu() {
         add_options_page(
             'HTR Contact Us Button Settings',
-            'Contact Us Button',
+            esc_html__( 'دکمه تماس با ما', 'htr-cub' ),
             'manage_options',
             $this->plugin_name,
             array( $this, 'display_plugin_setup_page' )
@@ -130,14 +130,14 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_section(
             'htr_cub_general_settings',
-            'General Settings',
+            esc_html__( 'تنظیمات عمومی', 'htr-cub' ),
             array( $this, 'htr_cub_general_settings_callback' ),
             $this->plugin_name
         );
 
         add_settings_field(
             'htr_cub_button_position',
-            'Button Position',
+            esc_html__( 'موقعیت دکمه', 'htr-cub' ),
             array( $this, 'htr_cub_button_position_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -145,7 +145,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_bottom_offset',
-            'Bottom Offset (px)',
+            esc_html__( 'فاصله از پایین (پیکسل)', 'htr-cub' ),
             array( $this, 'htr_cub_bottom_offset_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -153,7 +153,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_right_offset',
-            'Right Offset (px)',
+            esc_html__( 'فاصله از راست (پیکسل)', 'htr-cub' ),
             array( $this, 'htr_cub_right_offset_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -161,7 +161,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_top_offset',
-            'Top Offset (px)',
+            esc_html__( 'فاصله از بالا (پیکسل)', 'htr-cub' ),
             array( $this, 'htr_cub_top_offset_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -169,7 +169,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_left_offset',
-            'Left Offset (px)',
+            esc_html__( 'فاصله از چپ (پیکسل)', 'htr-cub' ),
             array( $this, 'htr_cub_left_offset_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -177,7 +177,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_display_pages',
-            'Display On Pages',
+            esc_html__( 'نمایش در صفحات', 'htr-cub' ),
             array( $this, 'htr_cub_display_pages_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -185,7 +185,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_custom_pages',
-            'Custom Page IDs/Slugs (comma-separated)',
+            esc_html__( 'شناسه/نامک صفحات دلخواه (با کاما جدا شود)', 'htr-cub' ),
             array( $this, 'htr_cub_custom_pages_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -193,7 +193,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_display_mode',
-            'Button Display Mode',
+            esc_html__( 'حالت نمایش دکمه', 'htr-cub' ),
             array( $this, 'htr_cub_display_mode_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -201,7 +201,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_bg_color',
-            'Button Background Color',
+            esc_html__( 'رنگ پس‌زمینه دکمه', 'htr-cub' ),
             array( $this, 'htr_cub_button_bg_color_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -209,7 +209,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_icon_color',
-            'Button Icon Color',
+            esc_html__( 'رنگ آیکون دکمه', 'htr-cub' ),
             array( $this, 'htr_cub_button_icon_color_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -217,7 +217,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_border_color',
-            'Button Border Color',
+            esc_html__( 'رنگ حاشیه دکمه', 'htr-cub' ),
             array( $this, 'htr_cub_button_border_color_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -225,7 +225,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_shadow',
-            'Button Shadow (CSS value)',
+            esc_html__( 'سایه دکمه (مقدار CSS)', 'htr-cub' ),
             array( $this, 'htr_cub_button_shadow_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -233,7 +233,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_hover_bg_color',
-            'Button Hover Background Color',
+            esc_html__( 'رنگ پس‌زمینه دکمه هنگام هاور', 'htr-cub' ),
             array( $this, 'htr_cub_button_hover_bg_color_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -241,7 +241,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_hover_icon_color',
-            'Button Hover Icon Color',
+            esc_html__( 'رنگ آیکون دکمه هنگام هاور', 'htr-cub' ),
             array( $this, 'htr_cub_button_hover_icon_color_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -249,7 +249,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_button_hover_border_color',
-            'Button Hover Border Color',
+            esc_html__( 'رنگ حاشیه دکمه هنگام هاور', 'htr-cub' ),
             array( $this, 'htr_cub_button_hover_border_color_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -257,7 +257,7 @@ class HTR_Contact_Us_Button_Admin {
 
         add_settings_field(
             'htr_cub_sub_buttons',
-            'Sub Buttons',
+            esc_html__( 'دکمه‌های زیرمجموعه', 'htr-cub' ),
             array( $this, 'htr_cub_sub_buttons_callback' ),
             $this->plugin_name,
             'htr_cub_general_settings'
@@ -346,7 +346,7 @@ class HTR_Contact_Us_Button_Admin {
      * @since    1.0.0
      */
     public function htr_cub_general_settings_callback() {
-        echo '<p>' . esc_html__( 'Configure the general settings for the Contact Us Button.', 'htr-cub' ) . '</p>';
+        echo '<p>' . esc_html__( 'تنظیمات عمومی دکمه تماس با ما را پیکربندی کنید.', 'htr-cub' ) . '</p>';
     }
 
     /**
@@ -359,10 +359,10 @@ class HTR_Contact_Us_Button_Admin {
         $position = isset( $options['htr_cub_button_position'] ) ? $options['htr_cub_button_position'] : 'bottom-right';
         ?>
         <select id="htr_cub_button_position" name="htr_cub_options[htr_cub_button_position]">
-            <option value="bottom-right" <?php selected( $position, 'bottom-right' ); ?>><?php esc_html_e( 'Bottom Right', 'htr-cub' ); ?></option>
-            <option value="bottom-left" <?php selected( $position, 'bottom-left' ); ?>><?php esc_html_e( 'Bottom Left', 'htr-cub' ); ?></option>
-            <option value="top-right" <?php selected( $position, 'top-right' ); ?>><?php esc_html_e( 'Top Right', 'htr-cub' ); ?></option>
-            <option value="top-left" <?php selected( $position, 'top-left' ); ?>><?php esc_html_e( 'Top Left', 'htr-cub' ); ?></option>
+            <option value="bottom-right" <?php selected( $position, 'bottom-right' ); ?>><?php esc_html_e( 'پایین-راست', 'htr-cub' ); ?></option>
+            <option value="bottom-left" <?php selected( $position, 'bottom-left' ); ?>><?php esc_html_e( 'پایین-چپ', 'htr-cub' ); ?></option>
+            <option value="top-right" <?php selected( $position, 'top-right' ); ?>><?php esc_html_e( 'بالا-راست', 'htr-cub' ); ?></option>
+            <option value="top-left" <?php selected( $position, 'top-left' ); ?>><?php esc_html_e( 'بالا-چپ', 'htr-cub' ); ?></option>
         </select>
         <?php
     }
@@ -429,12 +429,12 @@ class HTR_Contact_Us_Button_Admin {
         $display_pages = isset( $options['htr_cub_display_pages'] ) ? $options['htr_cub_display_pages'] : 'all';
         ?>
         <select id="htr_cub_display_pages" name="htr_cub_options[htr_cub_display_pages]">
-            <option value="all" <?php selected( $display_pages, 'all' ); ?>><?php esc_html_e( 'All Pages', 'htr-cub' ); ?></option>
-            <option value="homepage" <?php selected( $display_pages, 'homepage' ); ?>><?php esc_html_e( 'Homepage', 'htr-cub' ); ?></option>
-            <option value="product_pages" <?php selected( $display_pages, 'product_pages' ); ?>><?php esc_html_e( 'Product Pages', 'htr-cub' ); ?></option>
-            <option value="blog_pages" <?php selected( $display_pages, 'blog_pages' ); ?>><?php esc_html_e( 'Blog Pages', 'htr-cub' ); ?></option>
-            <option value="category_pages" <?php selected( $display_pages, 'category_pages' ); ?>><?php esc_html_e( 'Category Pages', 'htr-cub' ); ?></option>
-            <option value="custom" <?php selected( $display_pages, 'custom' ); ?>><?php esc_html_e( 'Custom Pages', 'htr-cub' ); ?></option>
+            <option value="all" <?php selected( $display_pages, 'all' ); ?>><?php esc_html_e( 'همه صفحات', 'htr-cub' ); ?></option>
+            <option value="homepage" <?php selected( $display_pages, 'homepage' ); ?>><?php esc_html_e( 'صفحه اصلی', 'htr-cub' ); ?></option>
+            <option value="product_pages" <?php selected( $display_pages, 'product_pages' ); ?>><?php esc_html_e( 'صفحات محصول', 'htr-cub' ); ?></option>
+            <option value="blog_pages" <?php selected( $display_pages, 'blog_pages' ); ?>><?php esc_html_e( 'صفحات وبلاگ', 'htr-cub' ); ?></option>
+            <option value="category_pages" <?php selected( $display_pages, 'category_pages' ); ?>><?php esc_html_e( 'صفحات دسته‌بندی', 'htr-cub' ); ?></option>
+            <option value="custom" <?php selected( $display_pages, 'custom' ); ?>><?php esc_html_e( 'صفحات دلخواه', 'htr-cub' ); ?></option>
         </select>
         <?php
     }
@@ -449,7 +449,7 @@ class HTR_Contact_Us_Button_Admin {
         $custom_pages = isset( $options['htr_cub_custom_pages'] ) ? $options['htr_cub_custom_pages'] : '';
         ?>
         <input type="text" id="htr_cub_custom_pages" name="htr_cub_options[htr_cub_custom_pages]" value="<?php echo esc_attr( $custom_pages ); ?>" class="regular-text" />
-        <p class="description"><?php esc_html_e( 'Enter comma-separated page IDs or slugs where the buttons should be displayed (e.g., 1, 2, my-page-slug).', 'htr-cub' ); ?></p>
+        <p class="description"><?php esc_html_e( 'شناسه یا نامک صفحات را با کاما جدا کنید (مثال: 1, 2, my-page-slug).', 'htr-cub' ); ?></p>
         <?php
     }
 
@@ -463,11 +463,11 @@ class HTR_Contact_Us_Button_Admin {
         $display_mode = isset( $options['htr_cub_display_mode'] ) ? $options['htr_cub_display_mode'] : 'single';
         ?>
         <select id="htr_cub_display_mode" name="htr_cub_options[htr_cub_display_mode]">
-            <option value="single" <?php selected( $display_mode, 'single' ); ?>><?php esc_html_e( 'Single Button', 'htr-cub' ); ?></option>
-            <option value="multiple_horizontal" <?php selected( $display_mode, 'multiple_horizontal' ); ?>><?php esc_html_e( 'Multiple Buttons (Horizontal)', 'htr-cub' ); ?></option>
-            <option value="multiple_vertical" <?php selected( $display_mode, 'multiple_vertical' ); ?>><?php esc_html_e( 'Multiple Buttons (Vertical)', 'htr-cub' ); ?></option>
-            <option value="dropdown_vertical" <?php selected( $display_mode, 'dropdown_vertical' ); ?>><?php esc_html_e( 'Dropdown Menu (Vertical)', 'htr-cub' ); ?></option>
-            <option value="dropdown_horizontal" <?php selected( $display_mode, 'dropdown_horizontal' ); ?>><?php esc_html_e( 'Dropdown Menu (Horizontal)', 'htr-cub' ); ?></option>
+            <option value="single" <?php selected( $display_mode, 'single' ); ?>><?php esc_html_e( 'تک دکمه', 'htr-cub' ); ?></option>
+            <option value="multiple_horizontal" <?php selected( $display_mode, 'multiple_horizontal' ); ?>><?php esc_html_e( 'چند دکمه (افقی)', 'htr-cub' ); ?></option>
+            <option value="multiple_vertical" <?php selected( $display_mode, 'multiple_vertical' ); ?>><?php esc_html_e( 'چند دکمه (عمودی)', 'htr-cub' ); ?></option>
+            <option value="dropdown_vertical" <?php selected( $display_mode, 'dropdown_vertical' ); ?>><?php esc_html_e( 'منوی کشویی (عمودی)', 'htr-cub' ); ?></option>
+            <option value="dropdown_horizontal" <?php selected( $display_mode, 'dropdown_horizontal' ); ?>><?php esc_html_e( 'منوی کشویی (افقی)', 'htr-cub' ); ?></option>
         </select>
         <?php
     }
@@ -521,7 +521,7 @@ class HTR_Contact_Us_Button_Admin {
         $shadow = isset( $options['htr_cub_button_shadow'] ) ? $options['htr_cub_button_shadow'] : '0px 0px 10px rgba(0,0,0,0.2)';
         ?>
         <input type="text" id="htr_cub_button_shadow" name="htr_cub_options[htr_cub_button_shadow]" value="<?php echo esc_attr( $shadow ); ?>" class="regular-text" />
-        <p class="description"><?php esc_html_e( 'Enter CSS box-shadow value (e.g., 0px 0px 10px rgba(0,0,0,0.2)).', 'htr-cub' ); ?></p>
+        <p class="description"><?php esc_html_e( 'مقدار CSS برای box-shadow را وارد کنید (مثال: 0px 0px 10px rgba(0,0,0,0.2)).', 'htr-cub' ); ?></p>
         <?php
     }
 
@@ -579,31 +579,31 @@ class HTR_Contact_Us_Button_Admin {
                     <?php foreach ( $sub_buttons as $index => $button ) : ?>
                         <div class="htr-cub-sub-button-item">
                             <p>
-                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_name"><?php esc_html_e( 'Name:', 'htr-cub' ); ?></label>
+                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_name"><?php esc_html_e( 'نام:', 'htr-cub' ); ?></label>
                                 <input type="text" id="htr_cub_sub_buttons_<?php echo $index; ?>_name" name="htr_cub_options[htr_cub_sub_buttons][<?php echo $index; ?>][name]" value="<?php echo esc_attr( $button['name'] ); ?>" class="regular-text" />
                             </p>
                             <p>
-                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_icon"><?php esc_html_e( 'Icon (Font Awesome class):', 'htr-cub' ); ?></label>
+                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_icon"><?php esc_html_e( 'آیکون (کلاس Font Awesome):', 'htr-cub' ); ?></label>
                                 <input type="text" id="htr_cub_sub_buttons_<?php echo $index; ?>_icon" name="htr_cub_options[htr_cub_sub_buttons][<?php echo $index; ?>][icon]" value="<?php echo esc_attr( $button['icon'] ); ?>" class="regular-text" />
                             </p>
                             <p>
-                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_link"><?php esc_html_e( 'Link:', 'htr-cub' ); ?></label>
+                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_link"><?php esc_html_e( 'لینک:', 'htr-cub' ); ?></label>
                                 <input type="url" id="htr_cub_sub_buttons_<?php echo $index; ?>_link" name="htr_cub_options[htr_cub_sub_buttons][<?php echo $index; ?>][link]" value="<?php echo esc_attr( $button['link'] ); ?>" class="regular-text" />
                             </p>
                             <p>
-                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_target"><?php esc_html_e( 'Link Target:', 'htr-cub' ); ?></label>
+                                <label for="htr_cub_sub_buttons_<?php echo $index; ?>_target"><?php esc_html_e( 'هدف لینک:', 'htr-cub' ); ?></label>
                                 <select id="htr_cub_sub_buttons_<?php echo $index; ?>_target" name="htr_cub_options[htr_cub_sub_buttons][<?php echo $index; ?>][target]">
-                                    <option value="_self" <?php selected( $button['target'], '_self' ); ?>><?php esc_html_e( 'Same Tab', 'htr-cub' ); ?></option>
-                                    <option value="_blank" <?php selected( $button['target'], '_blank' ); ?>><?php esc_html_e( 'New Tab', 'htr-cub' ); ?></option>
+                                    <option value="_self" <?php selected( $button['target'], '_self' ); ?>><?php esc_html_e( 'همین تب', 'htr-cub' ); ?></option>
+                                    <option value="_blank" <?php selected( $button['target'], '_blank' ); ?>><?php esc_html_e( 'تب جدید', 'htr-cub' ); ?></option>
                                 </select>
                             </p>
-                            <button type="button" class="button htr-cub-remove-sub-button"><?php esc_html_e( 'Remove Button', 'htr-cub' ); ?></button>
+                            <button type="button" class="button htr-cub-remove-sub-button"><?php esc_html_e( 'حذف دکمه', 'htr-cub' ); ?></button>
                             <hr />
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-            <button type="button" class="button button-secondary" id="htr-cub-add-sub-button"><?php esc_html_e( 'Add New Sub Button', 'htr-cub' ); ?></button>
+            <button type="button" class="button button-secondary" id="htr-cub-add-sub-button"><?php esc_html_e( 'افزودن دکمه زیرمجموعه جدید', 'htr-cub' ); ?></button>
         </div>
         <?php
     }
